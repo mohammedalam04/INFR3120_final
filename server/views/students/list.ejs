@@ -1,0 +1,44 @@
+<%- include('../partials/header'); %>
+<%- include('../partials/nav_top'); %>
+<main class="container">
+    <div class="row">
+        <div class="offset-md-1 col-md-10">
+            <h1><%= title %></h1> 
+            <a href="/students/add" class="btn btn-primary" 
+            role="button"><i class="fas fa-plus-circle"></i> Add Book</a>      
+            <br>
+            <table class="table table-bordered table-striped table-hover">
+                <tr class="d-flex">
+                    <th class="text-center col-2">First Name</th>
+                    <th class="text-center col-2">Last Name</th>
+                    <th class="text-center col-1">Age</th>
+                    <th class="text-center col-3">E-mail</th>
+                    <th class="text-center col-2">Location</th>
+                </tr>
+                <% for(let count=0; count<studentsList.length; count++) { %>    
+                    <tr class="d-flex">
+                        <td class="text-center col-2"><%= studentsList[count].fname %></td>
+                        <td class="text-center col-2"><%= studentsList[count].lname %></td>
+                        <td class="text-center col-1"><%= studentsList[count].age %></td>
+                        <td class="text-center col-3"><%= studentsList[count].email %></td>
+                        <td class="text-center col-2"><%= studentsList[count].locaton %></td>
+                        <td class="text-center col-1">
+                            <a href="/students/edit/<%= BookList[count]._id %>" 
+                            class="btn btn-primary btn-sm">
+                                <i class="fas fa-pencil-alt"></i> Edit
+                            </a>
+                        </td>
+                        <td class="text-center col-1">
+                            <a href="/students/delete/<%= BookList[count]._id %>" 
+                            class="btn btn-danger btn-sm">
+                                <i class="fas trash-alt"></i> Delete
+                            </a>
+                        </td>
+                    </tr>
+                <% } %>
+            </table>
+        </div>
+    </div>
+</main>
+<%- include('../partials/nav_bottom'); %>
+<%- include('../partials/footer'); %>

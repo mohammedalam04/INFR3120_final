@@ -1,6 +1,6 @@
 let mongoose = require('mongoose');
 
-// students schema
+// students model
 let studentModel = mongoose.Schema({
   fname: String,
   lname: String,
@@ -10,7 +10,6 @@ let studentModel = mongoose.Schema({
 },
 {
   collection: "students"
-}
-);
+});
 
-module.exports = mongoose.model('Student', studentModel);
+module.exports = mongoose.model('students', studentModel);

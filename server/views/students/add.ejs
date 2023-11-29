@@ -1,0 +1,58 @@
+<%- include('../partials/header'); %>
+<%- include('../partials/nav_top'); %>
+<!-- Content for the add page -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-3 col-md-6">
+      <h1><%= title %></h1>
+      <form class="form" method="post">
+
+        <div class="form-group">
+          <label for="fnameTextField">First Name</label>
+          <input type="text" class="form-control"
+          id="fnameTextField"
+          placeholder="Enter the student's first name"
+          name="fname" required>
+        </div>
+
+        <div class="form-group">
+          <label for="lnameTextField">Last Name</label>
+          <input type="text" class="form-control"
+          id="lnameTextField"
+          placeholder="Enter the student's last name"
+          name="lname" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="ageTextField">Age</label>
+          <input type="number" class="form-control"
+          id="ageTextField"
+          placeholder="Enter the student's age"
+          name="age" required>
+        </div>
+
+        <div class="form-group">
+          <label for="emailTextField">Email</label>
+          <input type="text" class="form-control"
+          id="emailTextField"
+          placeholder="Enter the student's email"
+          name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="locationTextField">Location</label>
+          <input type="text" class="form-control"
+          id="locationTextField"
+          placeholder="Enter the student's location"
+          name="location" required>
+        </div>
+        <br>
+        <button class="btn-btn-primary" type="submit"> Submit</button>
+        <a href="/students" class="btn btn-warning"> Cancel</a>
+
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('../partials/nav_bottom'); %>
+<%- include('../partials/footer'); %>

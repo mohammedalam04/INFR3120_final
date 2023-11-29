@@ -1,22 +1,14 @@
 let express = require('express');
 let router = express.Router();
+let indexController = require('../controllers/index');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { 
-    title: 'A_StRIveRs' });
-});
+router.get('/', indexController.displayHomePage);
 
 /* GET signup page. */
-router.get('/signup', function(req, res, next) {
-  res.render('index', { 
-    title: 'Sign Up' });
-});
+router.get('/signup', indexController.displaySignupPage);
 
 /* GET contact page. */
-router.get('/contact', function(req, res, next) {
-  res.render('index', { 
-    title: "Contact Us" });
-});
+router.get('/contact', indexController.displayContactPage);
 
 module.exports = router;
