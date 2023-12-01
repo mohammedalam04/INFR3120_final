@@ -1,40 +1,127 @@
-const express = require('express');
-const router = express.Router();
-
+let express = require('express');
+let router = express.Router();
 // connect to student model
-const Student = require('../models/students');
+let students = require('../models/studentModel');
 
-module.exports.displayStudents = async (req,res,next)=>{ //< Mark function as async
+// READ operation
+module.exports.displayStudents = async (req,res,next) => { //< Mark function as async
   try{
-     const studentsList = await Student.find(); //< Use of await keyword
-     res.render('students/list', {
-        title: 'Students List', 
-        studentsList: studentsList
-     });
-  }catch(err){
-     console.error(err);
-     //Handle error
-     res.render('students/list', {
+    const studentsList = await students.find(); //< Use of await keyword
+    res.render('students/list', {
+      title: 'Students List', 
+      studentsList: studentsList
+    });
+  }
+  catch(err) {
+    console.error(err);
+    //Handle error
+    res.render('students/list', {
+      error: 'Error on server'
+    });
+  }
+};
+
+// CREATE operation (Add)
+// get add page
+module.exports.addStudent = async (req,res,next) => {
+  try{
+    res.render('students/add',
+    {
+        title:'Add Student'
+    })
+  }
+  catch(err) {
+    console.error(err);
+    res.render('students/list',
+    {
+        error: 'Server Error'
+    });
+  }
+};
+
+// process the add operation 
+// POST operation
+module.exports.processAddStudent = async (req,res,next) => {
+  try{
+    let newStudent = students({
+        "fname":req.body.fname,
+        "lname": req.body.lname,
+        "age": req.body.age,
+        "email": req.body.email,
+        "location": req.body.location
+    });
+    students.create(newStudent).then(() =>{
+        res.redirect('/students/list')
+    })
+  }
+  catch(error){
+    console.error(err);
+    res.render('students/list',
+    {
         error: 'Error on server'
-     });
+    });
   }
 };
 
-module.exports.addStudent = async (req,res,next)=>{
+// EDIT or UPDATE operation
+// GET route the edit page
+module.exports.editStudent = async (req,res,next) => {
   try{
-      res.render('students/add',
-      {
-          title:'Add Student'
-      })
+    const id = req.params.id;
+    const studentToEdit = await students.findById(id);
+    res.render('students/edit',
+    {
+        title:'Edit Student',
+        students: studentToEdit
+    })
   }
-  catch(err)
-  {
-      console.error(err);
-      res.render('students/list',
-      {
-          error: 'Error on the server'
-      });
+  catch(err) {
+    console.error(err);
+    res.render('students/edit',
+    {
+        error: 'Server Error'
+    });
   }
 };
 
-//module.exports.processEditPage = {}
+// POST route for update operation
+module.exports.processEditStudent = async (req,res,next) => {
+  try{
+    let updateStudent = students({
+      "_id": id,
+      "fname": req.body.fname,
+      "lname": req.body.lname,
+      "age": req.body.age,
+      "email": req.body.email,
+      "location": req.body.location
+    });
+    students.updateOne({_id:id}).then(() =>{
+        res.redirect('/students/list')
+    })
+  }
+  catch(err) {
+    console.error(err);
+    res.render('students/list',
+    {
+        error: 'Server Error'
+    });
+  }
+};
+
+// DELETE operation
+// GET route to delete page
+module.exports.deleteStudent = async (req,res,next) => {
+  try{
+    let id = req.params.id;
+    students.deleteOne({_id:id}).then(() => {
+      res.redirect('/students/list')
+    })
+  }
+  catch(err) {
+    console.error(err);
+    res.render('students/list',
+    {
+        error: 'Server Error'
+    });
+  }
+};

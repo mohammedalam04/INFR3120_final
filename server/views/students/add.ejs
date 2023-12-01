@@ -4,39 +4,39 @@
 <div class="container">
   <div class="row">
     <div class="col-md-offset-3 col-md-6">
-      <h1><%= title %></h1>
-      <form class="form" method="post">
-
+    <h1><%= title %></h1>
+      
+      <form class="form" method="POST">
         <div class="form-group">
           <label for="fnameTextField">First Name</label>
           <input type="text" class="form-control"
-          id="fnameTextField"
-          placeholder="Enter the student's first name"
+          id = "fnameTextField"
+          placeholder = "Enter the student's first name"
           name="fname" required>
         </div>
 
         <div class="form-group">
           <label for="lnameTextField">Last Name</label>
           <input type="text" class="form-control"
-          id="lnameTextField"
-          placeholder="Enter the student's last name"
-          name="lname" required>
+          id = "lnameTextField"
+          placeholder = "Enter the student's last name"
+          name = "lname" required>
         </div>
         
-        <div class="form-group">
-          <label for="ageTextField">Age</label>
-          <input type="number" class="form-control"
-          id="ageTextField"
-          placeholder="Enter the student's age"
-          name="age" required>
+        <div class = "form-group">
+          <label for = "ageTextField">Age</label>
+          <input type = "number" class = "form-control"
+          id = "ageTextField"
+          placeholder = "Enter the student's age"
+          name = "age" required>
         </div>
 
-        <div class="form-group">
-          <label for="emailTextField">Email</label>
-          <input type="text" class="form-control"
-          id="emailTextField"
-          placeholder="Enter the student's email"
-          name="email" required>
+        <div class = "form-group">
+          <label for = "emailTextField">Email</label>
+          <input type = "text" class="form-control"
+          id = "emailTextField"
+          placeholder = "Enter the student's email"
+          name = "email" required>
         </div>
 
         <div class="form-group">
@@ -47,10 +47,15 @@
           name="location" required>
         </div>
         <br>
-        <button class="btn-btn-primary" type="submit"> Submit</button>
-        <a href="/students" class="btn btn-warning"> Cancel</a>
+
+        <button class="btn-btn-primary" type="submit"> 
+          <i class="fas fa-edit"></i> Submit</button>
+
+          <a href="/students/list" class="btn btn-warning">
+          <i class="fas fa-undo"></i> Cancel</a>
 
       </form>
+
     </div>
   </div>
 </div>
