@@ -1,5 +1,7 @@
 let express = require('express');
 let router = express.Router();
+let mongoose = require('mongoose');
+let students = require('../models/studentModel');
 let studentsController = require('../controllers/students');
 
 /* Read operation */

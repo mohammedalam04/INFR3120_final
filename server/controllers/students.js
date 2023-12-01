@@ -1,7 +1,8 @@
 let express = require('express');
 let router = express.Router();
-// connect to student model
+let mongoose = require('mongoose');
 let students = require('../models/studentModel');
+let studentsController = require('../controllers/students');
 
 // READ operation
 module.exports.displayStudents = async (req,res,next) => { //< Mark function as async
@@ -16,7 +17,7 @@ module.exports.displayStudents = async (req,res,next) => { //< Mark function as 
     console.error(err);
     //Handle error
     res.render('students/list', {
-      error: 'Error on server'
+      error: 'Server Error'
     });
   }
 };
@@ -58,7 +59,7 @@ module.exports.processAddStudent = async (req,res,next) => {
     console.error(err);
     res.render('students/list',
     {
-        error: 'Error on server'
+        error: 'Server Error'
     });
   }
 };
@@ -87,6 +88,7 @@ module.exports.editStudent = async (req,res,next) => {
 // POST route for update operation
 module.exports.processEditStudent = async (req,res,next) => {
   try{
+    let id = req.params.id;
     let updateStudent = students({
       "_id": id,
       "fname": req.body.fname,
@@ -95,7 +97,7 @@ module.exports.processEditStudent = async (req,res,next) => {
       "email": req.body.email,
       "location": req.body.location
     });
-    students.updateOne({_id:id}).then(() =>{
+    students.updateOne({_id:id}, updateStudent).then(() =>{
         res.redirect('/students/list')
     })
   }
