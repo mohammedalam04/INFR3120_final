@@ -4,7 +4,30 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
+let router = express.Router();
 
+let app = express();
+
+let session = require('express-session');
+let passport = require('passport');
+let passportLocal = require('passport-local');
+let localStrategy = passportLocal.Strategy;
+let flash = require('connect-flash');
+
+// create a user model instance
+let userModel = require('../models/user');
+let user = userModel.User;
+
+// view engine setup
+app.set('views', path.join(__dirname, '../views'));
+app.set('view engine', 'ejs');
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, '../../public')));
+app.use(express.static(path.join(__dirname, '../../node_modules')));
 
 // configure mongoDB
 let mongoose = require('mongoose');
@@ -18,23 +41,32 @@ mongoDB.once('open', ()=> {
   console.log('Connected to MongoDB');
 });
 
+// Set-up an express session
+app.use(session({
+  secret: "somesecret",
+  saveUninitialized: false,
+  resave: false
+}))
+
+// initialize flash
+app.use(flash());
+
+// implement a user authentication strategy
+passport.use(user.createStrategy());
+
+// serialize and deserialize the user's information
+passport.serializeUser(user.serializeUser());
+passport.deserializeUser(user.deserializeUser());
+
+// initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 // routers
 let indexRouter = require('../routes/index');
 let studentsRouter = require('../routes/students');
 let usersRouter = require('../routes/users');
-
-let app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, '../views'));
-app.set('view engine', 'ejs');
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../../public')));
-app.use(express.static(path.join(__dirname, '../../node_modules')));
+const { resourceUsage } = require('process');
 
 app.use('/', indexRouter);
 app.use('/students', studentsRouter);
