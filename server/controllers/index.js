@@ -20,7 +20,7 @@ module.exports.displaySignupPage = (req, res, next) => {
 }
 
 module.exports.displayContactPage = (req, res, next) => {
-  res.render('index', {
+  res.render('contactus', {
     title: "Contact Us",
     displayName: req.user ? req.user.displayName: ''
  });
