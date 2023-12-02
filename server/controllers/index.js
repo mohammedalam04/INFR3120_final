@@ -94,7 +94,7 @@ module.exports.processRegisterPage = (req, res, next) => {
       })
     }
     else {
-      // if registration is not successful
+      // if registration is successful
       return passport.authenticate('local')(req, res, () => {
         res.redirect('/students/list');
       })

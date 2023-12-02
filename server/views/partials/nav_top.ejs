@@ -35,10 +35,10 @@
               <i class="fa-solid fa-phone-flip"></i> Contact Us</a>
             </li>
             
-            <% if(typeof displayNAme == 'string' && displayName) { %>
+            <% if(typeof displayName == 'string' && displayName) { %>
               <li class = "navbar-text">
                 <i class = "fas fa-lg fa-user"></i>
-                Welcome, <% displayName %></li>
+                Welcome, <%= displayName %></li>
                 <li class = "navitem">
                   <a href = "/logout" class = "nav-link">
                     <i class = "fas fa-lg fa-sign-out-alt"></i> Logout</a>
