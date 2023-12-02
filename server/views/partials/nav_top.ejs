@@ -1,15 +1,16 @@
     <!-- Nav Bar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/">A_StRIveRs</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+       <!--logo iamge-->
+        <div class="image"> 
+              <img src="../Assets/images/group-logo.png" alt="Logo">
+
+            </div>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ms-auto">
 
             <li class="nav-item">
-            <% if (title == "A_StRIveRs") { %>
+            <% if (title == "Home") { %>
               <a class="nav-link active" aria-current="page" href="/">
             <% } else { %>
               <a class="nav-link" aria-current="page" href="/">
@@ -28,9 +29,9 @@
 
             <li class="nav-item">
             <% if (title == "Contact Us") { %>
-              <a class="nav-link active" href="/contact">
+              <a class="nav-link active" href="/contactus">
             <% } else { %>
-              <a class="nav-link" href="/contact">
+              <a class="nav-link" href="/contactus">
             <% } %>
               <i class="fa-solid fa-phone-flip"></i> Contact Us</a>
             </li>
