@@ -1,7 +1,7 @@
 let express = require('express');
 let router = express.Router();
 const passport = require('passport');
-
+let DB = require('../config/db');
 let userModel = require('../models/user');
 let User = userModel.User;
 
@@ -79,21 +79,21 @@ module.exports.processRegisterPage = (req, res, next) => {
     //password req.body.password,
     email: req.body.email,
     displayName: req.body.displayName
-  });
+  })
   User.register(newUser, req.body.password, (err) => {
     if(err) {
       console.log("Error inserting new user");
       if(err.name == "UserExistError") {
         req.flash('registerMessage',
-        "Registration Error: User already exists")
-      }
+        "Registration Error: User already exists"
+      )}
       return res.render('auth/register', {
         title: "Register",
         message: req.flash('registerMessage'),
         displayName: req.user ? req.user.displayName: ''
       })
     }
-    else{
+    else {
       // if registration is not successful
       return passport.authenticate('local')(req, res, () => {
         res.redirect('/students/list');

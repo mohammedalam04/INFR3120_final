@@ -1,6 +1,10 @@
 let express = require('express');
 let router = express.Router();
 let indexController = require('../controllers/index');
+const passport = require('passport');
+let DB = require('../config/db');
+let userModel = require('../models/user');
+let User = userModel.User;
 
 /* GET home page. */
 router.get('/', indexController.displayHomePage);

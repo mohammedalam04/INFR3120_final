@@ -16,7 +16,7 @@ let flash = require('connect-flash');
 
 // create a user model instance
 let userModel = require('../models/user');
-let user = userModel.User;
+let User = userModel.User;
 
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
@@ -31,11 +31,11 @@ app.use(express.static(path.join(__dirname, '../../node_modules')));
 
 // configure mongoDB
 let mongoose = require('mongoose');
+let mongoDB = mongoose.connection;
 let DB = require('./db');
 
 // point mongoose to DB URI
 mongoose.connect(DB.URI);
-let mongoDB = mongoose.connection;
 mongoDB.on('error', console.error.bind(console, 'MongoDB Connection Error'));
 mongoDB.once('open', ()=> {
   console.log('Connected to MongoDB');
@@ -43,20 +43,20 @@ mongoDB.once('open', ()=> {
 
 // Set-up an express session
 app.use(session({
-  secret: "somesecret",
+  secret: "SomeSecret",
   saveUninitialized: false,
   resave: false
-}))
+}));
 
 // initialize flash
 app.use(flash());
 
 // implement a user authentication strategy
-passport.use(user.createStrategy());
+passport.use(User.createStrategy());
 
 // serialize and deserialize the user's information
-passport.serializeUser(user.serializeUser());
-passport.deserializeUser(user.deserializeUser());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // initialize passport
 app.use(passport.initialize());

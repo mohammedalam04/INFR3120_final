@@ -8,7 +8,8 @@ let User = mongoose.Schema({
     trim: true,
     required: "Username is required"
   },
-  /*password: {
+  /*
+  password: {
     type: String,
     default: "",
     trim: true,
@@ -20,10 +21,16 @@ let User = mongoose.Schema({
     trim: true,
     required: "Display name is required"
   },
+  email:
+  {
+       type:String,
+       default:"",
+       trim:true,
+       required:'Email is required'
+  },
   createdAt: {
     type: Date,
-    default: Date.now,
-    immutable: true
+    default: Date.now
   },
   updatedAt: {
     type: Date,
