@@ -3,11 +3,15 @@
 <main class="container">
     <div class="row">
         <div class="offset-md-1">
-            <h1><%= title %></h1> 
-            <a href="/students/add" class="btn btn-primary" 
-            role="button"><i class="fas fa-plus-circle"></i> Add Student</a>      
-            <br>
-            <br>
+            <h1><%= title %></h1>
+
+            <% if(typeof displayName == 'string' && displayName) { %>
+                <a href="/students/add" class="btn btn-primary" 
+                role="button"><i class="fas fa-plus-circle"></i> Add Student</a>      
+                <br>
+                <br>
+            <% } %>
+
             <table class="table table-bordered table-striped table-hover table-light">
                 <thead>
                     <tr>
@@ -16,8 +20,11 @@
                         <th class="text-center" scope="col">Age</th>
                         <th class="text-center" scope="col">E-mail</th>
                         <th class="text-center" scope="col">Location</th>
-                        <th class="text-center" scope="col">Edit</th>
-                        <th class="text-center" scope="col">Delete</th>
+                        <!-- if logged in then show edit/delete -->
+                        <% if(typeof displayName == 'string' && displayName) { %>
+                            <th class="text-center" scope="col">Edit</th>
+                            <th class="text-center" scope="col">Delete</th>
+                        <% } %>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,16 +35,19 @@
                         <td class="text-center"><%= studentsList[count].age %></td>
                         <td class="text-center"><%= studentsList[count].email %></td>
                         <td class="text-center"><%= studentsList[count].location %></td>
-                        <td class="text-center">
-                            <a href="/students/edit/<%= studentsList[count]._id %>" 
-                                class="btn btn-primary btn-sm">
-                                <i class="fas fa-pencil-alt"></i></a>
-                        </td>
-                        <td class="text-center">
-                            <a href="/students/delete/<%= studentsList[count]._id %>" 
-                                class="btn btn-danger btn-sm">
-                                <i class="fa-solid fa-trash"></i></a>
-                        </td>
+                        <!-- if logged in then show edit/delete -->
+                        <% if(typeof displayName == 'string' && displayName) { %>
+                            <td class="text-center">
+                                <a href="/students/edit/<%= studentsList[count]._id %>" 
+                                    class="btn btn-primary btn-sm">
+                                    <i class="fas fa-pencil-alt"></i></a>
+                            </td>
+                            <td class="text-center">
+                                <a href="/students/delete/<%= studentsList[count]._id %>" 
+                                    class="btn btn-danger btn-sm">
+                                    <i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        <% } %>
                     </tr>
                 <% } %>
                 </tbody>

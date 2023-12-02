@@ -10,7 +10,8 @@ module.exports.displayStudents = async (req,res,next) => { //< Mark function as 
     const studentsList = await students.find(); //< Use of await keyword
     res.render('students/list', {
       title: 'Students List', 
-      studentsList: studentsList
+      studentsList: studentsList,
+      displayName: req.user ? req.user.displayName: ''
     });
   }
   catch(err) {
@@ -28,7 +29,8 @@ module.exports.addStudent = async (req,res,next) => {
   try{
     res.render('students/add',
     {
-        title:'Add Student'
+        title:'Add Student',
+        displayName: req.user ? req.user.displayName: ''
     })
   }
   catch(err) {
@@ -59,7 +61,8 @@ module.exports.processAddStudent = async (req,res,next) => {
     console.error(err);
     res.render('students/list',
     {
-        error: 'Server Error'
+        error: 'Server Error',
+        displayName: req.user ? req.user.displayName: ''
     });
   }
 };
@@ -73,14 +76,16 @@ module.exports.editStudent = async (req,res,next) => {
     res.render('students/edit',
     {
         title:'Edit Student',
-        students: studentToEdit
+        students: studentToEdit,
+        displayName: req.user ? req.user.displayName: ''
     })
   }
   catch(err) {
     console.error(err);
     res.render('students/edit',
     {
-        error: 'Server Error'
+        error: 'Server Error',
+        displayName: req.user ? req.user.displayName: ''
     });
   }
 };
@@ -105,7 +110,8 @@ module.exports.processEditStudent = async (req,res,next) => {
     console.error(err);
     res.render('students/list',
     {
-        error: 'Server Error'
+        error: 'Server Error',
+        displayName: req.user ? req.user.displayName: ''
     });
   }
 };
@@ -123,7 +129,8 @@ module.exports.deleteStudent = async (req,res,next) => {
     console.error(err);
     res.render('students/list',
     {
-        error: 'Server Error'
+        error: 'Server Error',
+        displayName: req.user ? req.user.displayName: ''
     });
   }
 };
