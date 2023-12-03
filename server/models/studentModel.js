@@ -13,8 +13,6 @@ let studentModel = mongoose.Schema({
   age: {
     type: Number,
     required: true,
-    min: 7,
-    max: 130,
   },
   email: {
     type: String,
