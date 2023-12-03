@@ -16,7 +16,7 @@ router.get('/home', indexController.displayHomePage);
 router.get('/signup', indexController.displaySignupPage);
 
 /* GET contact page. */
-router.get('/contact', indexController.displayContactPage);
+router.get('/contactus', indexController.displayContactPage);
 
 /* GET login page. */
 router.get('/login', indexController.displayLoginPage);
