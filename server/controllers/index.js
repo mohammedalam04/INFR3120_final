@@ -13,7 +13,7 @@ module.exports.displayHomePage = (req, res, next) => {
 }
 
 module.exports.displaySignupPage = (req, res, next) => {
-  res.render('register', {
+  res.render('index', {
     title: 'Sign Up',
     displayName: req.user ? req.user.displayName: ''
   });
